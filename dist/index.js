@@ -12996,7 +12996,7 @@ define("@scom/scom-emoji-picker", ["require", "exports", "@ijstech/components", 
         async renderEmojiCate() {
             this.gridEmojiCate.clearInnerHTML();
             for (let category of emoji_json_2.emojiCategories) {
-                const cateEl = (this.$render("i-vstack", { id: `cate-${category.value}`, overflow: 'hidden', cursor: 'pointer', opacity: 0.5, padding: { top: '0.25rem', bottom: '0.25rem' }, horizontalAlignment: "center", position: 'relative', class: "emoji-cate", gap: '0.5rem', onClick: (target) => this.onEmojiCateSelected(target, category) },
+                const cateEl = (this.$render("i-vstack", { id: `cate-${category.value}`, overflow: 'hidden', cursor: 'pointer', opacity: 0.5, padding: { top: '0.5rem', bottom: '0.5rem' }, horizontalAlignment: "center", position: 'relative', class: "emoji-cate", gap: '0.5rem', onClick: (target) => this.onEmojiCateSelected(target, category) },
                     this.$render("i-image", { url: category.image, width: '1.25rem', height: '1.25rem', display: 'block' }),
                     this.$render("i-hstack", { visible: false, border: { radius: '9999px' }, height: '0.25rem', width: '100%', position: 'absolute', bottom: "0px", background: { color: Theme.colors.primary.main } })));
                 this.gridEmojiCate.appendChild(cateEl);
@@ -13007,7 +13007,7 @@ define("@scom/scom-emoji-picker", ["require", "exports", "@ijstech/components", 
             const group = (this.$render("i-vstack", { id: `${category.value}`, border: { bottom: { width: '1px', style: 'solid', color: Theme.divider } }, gap: "0.75rem", class: "emoji-group" },
                 this.$render("i-hstack", { padding: { top: '0.75rem', left: '0.75rem', right: '0.75rem', bottom: '0.75rem' }, position: "sticky", top: "0px", width: '100%', zIndex: 9, background: { color: Theme.background.modal }, verticalAlignment: "center", horizontalAlignment: "space-between" },
                     this.$render("i-label", { caption: category.name, font: { size: '1.063rem', weight: 700 }, wordBreak: "break-word" }),
-                    this.$render("i-button", { caption: "Clear all", font: { size: '0.9rem', weight: 700, color: Theme.colors.primary.main }, cursor: 'pointer', boxShadow: 'none', padding: { left: '0.75rem', right: '0.75rem' }, lineHeight: '1.25rem', border: { radius: '9999px' }, background: { color: 'transparent' }, visible: this.isRecent(category) && this.hasRecentEmojis, onClick: this.onRecentClear }))));
+                    this.$render("i-button", { caption: "Clear all", font: { size: '0.9rem', weight: 700, color: Theme.colors.primary.main }, cursor: 'pointer', boxShadow: 'none', padding: { left: '0.75rem', right: '0.75rem' }, lineHeight: '1.25rem', border: { radius: '9999px' }, background: { color: 'transparent' }, visible: this.isRecent(category) && this.hasRecentEmojis, onClick: this.onRecentClear.bind(this) }))));
             const itemWrap = this.$render("i-grid-layout", { id: `group-${category.value}`, columnsPerRow: 9, padding: { left: '0.75rem', right: '0.75rem', bottom: '0.75rem' } });
             group.append(itemWrap);
             parent.appendChild(group);
@@ -13173,8 +13173,8 @@ define("@scom/scom-emoji-picker", ["require", "exports", "@ijstech/components", 
                     this.$render("i-hstack", { verticalAlignment: "center", border: { radius: '9999px', width: '1px', style: 'solid', color: Theme.divider }, minHeight: 40, width: '100%', background: { color: Theme.input.background }, padding: { left: '0.75rem', right: '0.75rem' }, margin: { top: '0.25rem', bottom: '0.25rem' }, gap: "4px" },
                         this.$render("i-icon", { width: '1rem', height: '1rem', name: 'search', fill: Theme.text.secondary }),
                         this.$render("i-input", { id: "edtEmoji", placeholder: 'Search emojis', width: '100%', height: '100%', border: { style: 'none' }, captionWidth: '0px', showClearButton: true, onClearClick: this.clearSearch, onKeyUp: this.onEmojiSearch }))),
-                this.$render("i-grid-layout", { id: "gridEmojiCate", verticalAlignment: "center", columnsPerRow: 9, margin: { top: 4 }, grid: { verticalAlignment: 'center', horizontalAlignment: 'center' }, border: { bottom: { width: '1px', style: 'solid', color: Theme.divider } } }),
-                this.$render("i-vstack", { id: "groupEmojis", maxHeight: 300, overflow: { y: 'auto' } }),
+                this.$render("i-grid-layout", { id: "gridEmojiCate", verticalAlignment: "center", columnsPerRow: 9, grid: { verticalAlignment: 'center', horizontalAlignment: 'center' }, border: { bottom: { width: '1px', style: 'solid', color: Theme.divider } } }),
+                this.$render("i-vstack", { id: "groupEmojis", position: "relative", maxHeight: 300, overflow: { y: 'auto' } }),
                 this.$render("i-vstack", { id: "pnlEmojiResult", border: { bottom: { width: '1px', style: 'solid', color: Theme.divider } }, maxHeight: 300, overflow: { y: 'auto' }, minHeight: 200, gap: "0.75rem", visible: false }),
                 this.$render("i-hstack", { position: "relative", width: '100%', verticalAlignment: "center", horizontalAlignment: "space-between", padding: { top: '0.75rem', left: '0.75rem', right: '0.75rem', bottom: '0.75rem' }, gap: "0.75rem", background: { color: Theme.background.modal }, border: { radius: '0 0 1rem 1rem', top: { width: '1px', style: 'solid', color: Theme.divider } } },
                     this.$render("i-label", { id: "lbEmoji", width: '1.25rem', height: '1.25rem', display: "inline-block" }),

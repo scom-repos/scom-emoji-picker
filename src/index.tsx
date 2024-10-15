@@ -81,7 +81,7 @@ export default class EmojiPicker extends Module {
                     overflow={'hidden'}
                     cursor='pointer'
                     opacity={0.5}
-                    padding={{ top: '0.25rem', bottom: '0.25rem' }}
+                    padding={{ top: '0.5rem', bottom: '0.5rem' }}
                     horizontalAlignment="center"
                     position='relative'
                     class="emoji-cate"
@@ -136,7 +136,7 @@ export default class EmojiPicker extends Module {
                         border={{ radius: '9999px' }}
                         background={{ color: 'transparent' }}
                         visible={this.isRecent(category) && this.hasRecentEmojis}
-                        onClick={this.onRecentClear}
+                        onClick={this.onRecentClear.bind(this)}
                     ></i-button>
                 </i-hstack>
             </i-vstack>
@@ -368,11 +368,10 @@ export default class EmojiPicker extends Module {
                     id="gridEmojiCate"
                     verticalAlignment="center"
                     columnsPerRow={9}
-                    margin={{ top: 4 }}
                     grid={{ verticalAlignment: 'center', horizontalAlignment: 'center' }}
                     border={{ bottom: { width: '1px', style: 'solid', color: Theme.divider } }}
                 ></i-grid-layout>
-                <i-vstack id="groupEmojis" maxHeight={300} overflow={{ y: 'auto' }} />
+                <i-vstack id="groupEmojis" position="relative" maxHeight={300} overflow={{ y: 'auto' }} />
                 <i-vstack
                     id="pnlEmojiResult"
                     border={{ bottom: { width: '1px', style: 'solid', color: Theme.divider } }}
