@@ -293,7 +293,7 @@ export default class EmojiPicker extends Module {
         this.recentEmojis[emoji.name] = emoji;
     }
 
-    private clearSearch() {
+    clearSearch() {
         this.pnlEmojiResult.visible = false;
         this.groupEmojis.visible = true;
         this.edtEmoji.value = '';

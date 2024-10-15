@@ -111,7 +111,7 @@ declare module "@scom/scom-emoji-picker" {
         private onEmojiColorSelected;
         private onEmojiCateSelected;
         private selectEmoji;
-        private clearSearch;
+        clearSearch(): void;
         private onEmojiSearch;
         onEmojiPickerClick(target: Control, event: Event): void;
         render(): any;
