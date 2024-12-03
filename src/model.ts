@@ -18,6 +18,7 @@ export class EmojiModel {
     }
 
     private filterEmojiByColor(data: IEmoji[]) {
+        if (!data || !data.length) return [];
         const colorHtmlCode = colorsMapper[this.currentColor].htmlCode;
         if (colorHtmlCode) {
             return data.filter(emoji => emoji.htmlCode.includes(colorHtmlCode));

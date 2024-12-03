@@ -70,6 +70,43 @@ declare module "@scom/scom-emoji-picker/model.ts" {
         searchEmojis(value: string): IEmoji[];
     }
 }
+/// <amd-module name="@scom/scom-emoji-picker/translations.json.ts" />
+declare module "@scom/scom-emoji-picker/translations.json.ts" {
+    const _default: {
+        en: {
+            clear_all: string;
+            search_emoji: string;
+            search_results: string;
+            recent: string;
+            smileys_and_people: string;
+            animals_and_nature: string;
+            food_and_drink: string;
+            activities: string;
+            travel_and_places: string;
+            objects: string;
+            symbols: string;
+            smileys_and_emotion: string;
+            flags: string;
+        };
+        "zh-hant": {};
+        vi: {
+            clear_all: string;
+            search_emoji: string;
+            search_results: string;
+            recent: string;
+            smileys_and_people: string;
+            animals_and_nature: string;
+            food_and_drink: string;
+            activities: string;
+            travel_and_places: string;
+            objects: string;
+            symbols: string;
+            smileys_and_emotion: string;
+            flags: string;
+        };
+    };
+    export default _default;
+}
 /// <amd-module name="@scom/scom-emoji-picker" />
 declare module "@scom/scom-emoji-picker" {
     import { Module, Control, ControlElement } from "@ijstech/components";

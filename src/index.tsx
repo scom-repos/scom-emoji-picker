@@ -12,8 +12,9 @@ import {
     ControlElement
 } from "@ijstech/components"
 import { IEmoji, IEmojiCategory } from './interface';
-import { colorsMapper, emojiCategories } from "./emoji.json";
+import { emojiCategories } from "./emoji.json";
 import { EmojiModel } from "./model";
+import translations from "./translations.json";
 
 interface EmojiPickerElement extends ControlElement {
     onEmojiSelected?: (value: string) => void;
@@ -52,6 +53,7 @@ export default class EmojiPicker extends Module {
     }
 
     init() {
+        this.i18n.init({...translations});
         super.init();
         this.emojiModel = new EmojiModel();
         this.onEmojiColorSelected = this.onEmojiColorSelected.bind(this);
@@ -127,7 +129,7 @@ export default class EmojiPicker extends Module {
                         wordBreak="break-word"
                     ></i-label>
                     <i-button
-                        caption="Clear all"
+                        caption="$clear_all"
                         font={{ size: '0.9rem', weight: 700, color: Theme.colors.primary.main }}
                         cursor='pointer'
                         boxShadow='none'
@@ -324,7 +326,7 @@ export default class EmojiPicker extends Module {
             this.pnlEmojiResult.clearInnerHTML();
             this.searchTimeout = setTimeout(() => {
                 const category = {
-                    name: 'Search results',
+                    name: '$search_results',
                     value: 'search'
                 }
                 this.renderEmojiGroup(this.pnlEmojiResult, category);
@@ -353,7 +355,7 @@ export default class EmojiPicker extends Module {
                         <i-icon width={'1rem'} height={'1rem'} name='search' fill={Theme.text.secondary} />
                         <i-input
                             id="edtEmoji"
-                            placeholder='Search emojis'
+                            placeholder='$search_emoji'
                             width='100%'
                             height='100%'
                             border={{ style: 'none' }}
