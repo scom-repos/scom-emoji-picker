@@ -15,55 +15,55 @@ define("@scom/scom-emoji-picker/emoji.json.ts", ["require", "exports"], function
     ///<amd-module name='@scom/scom-emoji-picker/emoji.json.ts'/> 
     exports.emojiCategories = [
         {
-            name: 'Recent',
+            name: '$recent',
             value: 'recent',
             image: 'https://abs-0.twimg.com/emoji/v2/svg/1f551.svg',
             groups: []
         },
         {
-            name: 'Smileys & Emotion',
+            name: '$smileys_and_emotion',
             value: 'smileys-and-people',
             image: 'https://abs-0.twimg.com/emoji/v2/svg/1f600.svg',
             groups: ['body', 'cat-face', 'clothing', 'creature-face', 'emotion', 'face-negative', 'face-neutral', 'face-positive', 'face-positive', 'face-role', 'face-sick', 'family', 'monkey-face', 'person', 'person-activity', 'person-gesture', 'person-role', 'skin-tone']
         },
         {
-            name: 'Animals & nature',
+            name: '$animals_and_nature',
             value: 'animals-and-nature',
             image: 'https://abs-0.twimg.com/emoji/v2/svg/1f43b.svg',
             groups: ['animal-amphibian', 'animal-bird', 'animal-bug', 'animal-mammal', 'animal-marine', 'animal-reptile', 'plant-flower', 'plant-other']
         },
         {
-            name: 'Food & drink',
+            name: '$food_and_drink',
             value: 'food-and-drink',
             image: 'https://abs-0.twimg.com/emoji/v2/svg/1f354.svg',
             groups: ['dishware', 'drink', 'food-asian', 'food-fruit', 'food-prepared', 'food-sweat', 'food-vegetable']
         },
         {
-            name: 'Activity',
+            name: '$activities',
             value: 'activities',
             image: 'https://abs-0.twimg.com/emoji/v2/svg/26bd.svg',
             groups: ["activities"]
         },
         {
-            name: 'Travel & places',
+            name: '$travel_and_places',
             value: 'travel-and-places',
             image: 'https://abs-0.twimg.com/emoji/v2/svg/1f698.svg',
             groups: ["travel-and-places"]
         },
         {
-            name: 'Objects',
+            name: '$objects',
             value: 'objects',
             image: 'https://abs-0.twimg.com/emoji/v2/svg/1f4a1.svg',
             groups: ["objects"]
         },
         {
-            name: 'Symbols',
+            name: '$symbols',
             value: 'symbols',
             image: 'https://abs-0.twimg.com/emoji/v2/svg/1f523.svg',
             groups: ["symbols"]
         },
         {
-            name: 'Flags',
+            name: '$flags',
             value: 'flags',
             image: 'https://abs-0.twimg.com/emoji/v2/svg/1f6a9.svg',
             groups: ["flags"]
@@ -12930,6 +12930,8 @@ define("@scom/scom-emoji-picker/model.ts", ["require", "exports", "@scom/scom-em
             return Object.keys(emoji_json_1.colorsMapper);
         }
         filterEmojiByColor(data) {
+            if (!data || !data.length)
+                return [];
             const colorHtmlCode = emoji_json_1.colorsMapper[this.currentColor].htmlCode;
             if (colorHtmlCode) {
                 return data.filter(emoji => emoji.htmlCode.includes(colorHtmlCode));
@@ -12961,7 +12963,45 @@ define("@scom/scom-emoji-picker/model.ts", ["require", "exports", "@scom/scom-em
     }
     exports.EmojiModel = EmojiModel;
 });
-define("@scom/scom-emoji-picker", ["require", "exports", "@ijstech/components", "@scom/scom-emoji-picker/emoji.json.ts", "@scom/scom-emoji-picker/model.ts"], function (require, exports, components_1, emoji_json_2, model_1) {
+define("@scom/scom-emoji-picker/translations.json.ts", ["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    ///<amd-module name='@scom/scom-emoji-picker/translations.json.ts'/> 
+    exports.default = {
+        "en": {
+            "clear_all": "Clear all",
+            "search_emoji": "Search emoji",
+            "search_results": "Search results",
+            "recent": "Recent",
+            "smileys_and_people": "Smileys & People",
+            "animals_and_nature": "Animals & Nature",
+            "food_and_drink": "Food & Drink",
+            "activities": "Activities",
+            "travel_and_places": "Travel & Places",
+            "objects": "Objects",
+            "symbols": "Symbols",
+            "smileys_and_emotion": "Smileys & Emotion",
+            "flags": "Flags"
+        },
+        "zh-hant": {},
+        "vi": {
+            "clear_all": "Xóa tất cả",
+            "search_emoji": "Tìm biểu tượng",
+            "search_results": "Kết quả tìm kiếm",
+            "recent": "Gần đây",
+            "smileys_and_people": "Biểu tượng cảm xúc & Con người",
+            "animals_and_nature": "Động vật và Thiên nhiên",
+            "food_and_drink": "Đồ ăn và Nước uống",
+            "activities": "Hoạt động",
+            "travel_and_places": "Du lịch và địa điểm",
+            "objects": "Đối tượng",
+            "symbols": "Ký hiệu",
+            "smileys_and_emotion": "Biểu tượng cảm xúc & Cảm xúc",
+            "flags": "Cờ"
+        }
+    };
+});
+define("@scom/scom-emoji-picker", ["require", "exports", "@ijstech/components", "@scom/scom-emoji-picker/emoji.json.ts", "@scom/scom-emoji-picker/model.ts", "@scom/scom-emoji-picker/translations.json.ts"], function (require, exports, components_1, emoji_json_2, model_1, translations_json_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const Theme = components_1.Styles.Theme.ThemeVars;
@@ -12976,6 +13016,7 @@ define("@scom/scom-emoji-picker", ["require", "exports", "@ijstech/components", 
             return !!Object.values(this.recentEmojis).length;
         }
         init() {
+            this.i18n.init({ ...translations_json_1.default });
             super.init();
             this.emojiModel = new model_1.EmojiModel();
             this.onEmojiColorSelected = this.onEmojiColorSelected.bind(this);
@@ -13007,7 +13048,7 @@ define("@scom/scom-emoji-picker", ["require", "exports", "@ijstech/components", 
             const group = (this.$render("i-vstack", { id: `${category.value}`, border: { bottom: { width: '1px', style: 'solid', color: Theme.divider } }, gap: "0.75rem", class: "emoji-group" },
                 this.$render("i-hstack", { padding: { top: '0.75rem', left: '0.75rem', right: '0.75rem', bottom: '0.75rem' }, position: "sticky", top: "0px", width: '100%', zIndex: 9, background: { color: Theme.background.modal }, verticalAlignment: "center", horizontalAlignment: "space-between" },
                     this.$render("i-label", { caption: category.name, font: { size: '1.063rem', weight: 700 }, wordBreak: "break-word" }),
-                    this.$render("i-button", { caption: "Clear all", font: { size: '0.9rem', weight: 700, color: Theme.colors.primary.main }, cursor: 'pointer', boxShadow: 'none', padding: { left: '0.75rem', right: '0.75rem' }, lineHeight: '1.25rem', border: { radius: '9999px' }, background: { color: 'transparent' }, visible: this.isRecent(category) && this.hasRecentEmojis, onClick: this.onRecentClear.bind(this) }))));
+                    this.$render("i-button", { caption: "$clear_all", font: { size: '0.9rem', weight: 700, color: Theme.colors.primary.main }, cursor: 'pointer', boxShadow: 'none', padding: { left: '0.75rem', right: '0.75rem' }, lineHeight: '1.25rem', border: { radius: '9999px' }, background: { color: 'transparent' }, visible: this.isRecent(category) && this.hasRecentEmojis, onClick: this.onRecentClear.bind(this) }))));
             const itemWrap = this.$render("i-grid-layout", { id: `group-${category.value}`, columnsPerRow: 9, padding: { left: '0.75rem', right: '0.75rem', bottom: '0.75rem' } });
             group.append(itemWrap);
             parent.appendChild(group);
@@ -13156,7 +13197,7 @@ define("@scom/scom-emoji-picker", ["require", "exports", "@ijstech/components", 
                 this.pnlEmojiResult.clearInnerHTML();
                 this.searchTimeout = setTimeout(() => {
                     const category = {
-                        name: 'Search results',
+                        name: '$search_results',
                         value: 'search'
                     };
                     this.renderEmojiGroup(this.pnlEmojiResult, category);
@@ -13172,7 +13213,7 @@ define("@scom/scom-emoji-picker", ["require", "exports", "@ijstech/components", 
                 this.$render("i-vstack", { padding: { left: '0.25rem', right: '0.25rem' } },
                     this.$render("i-hstack", { verticalAlignment: "center", border: { radius: '9999px', width: '1px', style: 'solid', color: Theme.divider }, minHeight: 40, width: '100%', background: { color: Theme.input.background }, padding: { left: '0.75rem', right: '0.75rem' }, margin: { top: '0.25rem', bottom: '0.25rem' }, gap: "4px" },
                         this.$render("i-icon", { width: '1rem', height: '1rem', name: 'search', fill: Theme.text.secondary }),
-                        this.$render("i-input", { id: "edtEmoji", placeholder: 'Search emojis', width: '100%', height: '100%', border: { style: 'none' }, captionWidth: '0px', showClearButton: true, onClearClick: this.clearSearch, onKeyUp: this.onEmojiSearch }))),
+                        this.$render("i-input", { id: "edtEmoji", placeholder: '$search_emoji', width: '100%', height: '100%', border: { style: 'none' }, captionWidth: '0px', showClearButton: true, onClearClick: this.clearSearch, onKeyUp: this.onEmojiSearch }))),
                 this.$render("i-grid-layout", { id: "gridEmojiCate", verticalAlignment: "center", columnsPerRow: 9, grid: { verticalAlignment: 'center', horizontalAlignment: 'center' }, border: { bottom: { width: '1px', style: 'solid', color: Theme.divider } } }),
                 this.$render("i-vstack", { id: "groupEmojis", position: "relative", maxHeight: 300, overflow: { y: 'auto' } }),
                 this.$render("i-vstack", { id: "pnlEmojiResult", border: { bottom: { width: '1px', style: 'solid', color: Theme.divider } }, maxHeight: 300, overflow: { y: 'auto' }, minHeight: 200, gap: "0.75rem", visible: false }),

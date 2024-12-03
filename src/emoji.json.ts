@@ -1,54 +1,54 @@
 export const emojiCategories = [
     {
-        name: 'Recent',
+        name: '$recent',
         value: 'recent',
         image: 'https://abs-0.twimg.com/emoji/v2/svg/1f551.svg',
         groups: []
     },
     {
-        name: 'Smileys & Emotion',
+        name: '$smileys_and_emotion',
         value: 'smileys-and-people',
         image: 'https://abs-0.twimg.com/emoji/v2/svg/1f600.svg',
         groups: ['body', 'cat-face', 'clothing', 'creature-face', 'emotion', 'face-negative', 'face-neutral', 'face-positive', 'face-positive', 'face-role', 'face-sick', 'family', 'monkey-face', 'person', 'person-activity', 'person-gesture', 'person-role', 'skin-tone']
     },
     {
-        name: 'Animals & nature',
+        name: '$animals_and_nature',
         value: 'animals-and-nature',
         image: 'https://abs-0.twimg.com/emoji/v2/svg/1f43b.svg',
         groups: ['animal-amphibian', 'animal-bird', 'animal-bug', 'animal-mammal', 'animal-marine', 'animal-reptile', 'plant-flower', 'plant-other']
     },
     {
-        name: 'Food & drink',
+        name: '$food_and_drink',
         value: 'food-and-drink',
         image: 'https://abs-0.twimg.com/emoji/v2/svg/1f354.svg',
         groups: ['dishware', 'drink', 'food-asian', 'food-fruit', 'food-prepared', 'food-sweat', 'food-vegetable']
     },
     {
-        name: 'Activity',
+        name: '$activities',
         value: 'activities',
         image: 'https://abs-0.twimg.com/emoji/v2/svg/26bd.svg',
         groups: ["activities"]
     },
     {
-        name: 'Travel & places',
+        name: '$travel_and_places',
         value: 'travel-and-places',
         image: 'https://abs-0.twimg.com/emoji/v2/svg/1f698.svg',
         groups: ["travel-and-places"]
     },
     {
-        name: 'Objects',
+        name: '$objects',
         value: 'objects',
         image: 'https://abs-0.twimg.com/emoji/v2/svg/1f4a1.svg',
         groups: ["objects"]
     },
     {
-        name: 'Symbols',
+        name: '$symbols',
         value: 'symbols',
         image: 'https://abs-0.twimg.com/emoji/v2/svg/1f523.svg',
         groups: ["symbols"]
     },
     {
-        name: 'Flags',
+        name: '$flags',
         value: 'flags',
         image: 'https://abs-0.twimg.com/emoji/v2/svg/1f6a9.svg',
         groups: ["flags"]
