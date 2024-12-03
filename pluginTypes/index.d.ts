@@ -74,35 +74,49 @@ declare module "@scom/scom-emoji-picker/model.ts" {
 declare module "@scom/scom-emoji-picker/translations.json.ts" {
     const _default: {
         en: {
+            activities: string;
+            animals_and_nature: string;
             clear_all: string;
+            flags: string;
+            food_and_drink: string;
+            objects: string;
+            recent: string;
             search_emoji: string;
             search_results: string;
-            recent: string;
-            smileys_and_people: string;
-            animals_and_nature: string;
-            food_and_drink: string;
-            activities: string;
-            travel_and_places: string;
-            objects: string;
-            symbols: string;
             smileys_and_emotion: string;
-            flags: string;
+            smileys_and_people: string;
+            symbols: string;
+            travel_and_places: string;
         };
-        "zh-hant": {};
-        vi: {
+        "zh-hant": {
+            activities: string;
+            animals_and_nature: string;
             clear_all: string;
+            flags: string;
+            food_and_drink: string;
+            objects: string;
+            recent: string;
             search_emoji: string;
             search_results: string;
-            recent: string;
-            smileys_and_people: string;
-            animals_and_nature: string;
-            food_and_drink: string;
-            activities: string;
-            travel_and_places: string;
-            objects: string;
-            symbols: string;
             smileys_and_emotion: string;
+            smileys_and_people: string;
+            symbols: string;
+            travel_and_places: string;
+        };
+        vi: {
+            activities: string;
+            animals_and_nature: string;
+            clear_all: string;
             flags: string;
+            food_and_drink: string;
+            objects: string;
+            recent: string;
+            search_emoji: string;
+            search_results: string;
+            smileys_and_emotion: string;
+            smileys_and_people: string;
+            symbols: string;
+            travel_and_places: string;
         };
     };
     export default _default;
