@@ -36,7 +36,7 @@ export default class EmojiPicker extends Module {
     private gridEmojiCate: GridLayout;
     private groupEmojis: VStack;
     private pnlEmojiResult: VStack;
-    private lbEmoji: Label;
+    private lbEmoji: Panel;
     private pnlColors: Panel;
     private pnlSelectedColor: Panel;
     private recent: Panel;
@@ -156,19 +156,14 @@ export default class EmojiPicker extends Module {
         }
         for (let i = 0; i < data.length; i++) {
             const item = data[i];
-            itemWrap.appendChild(
-                <i-panel
-                    width={'1.5rem'} height={'1.5rem'}
-                    cursor="pointer"
-                    onClick={(target: Control, event: MouseEvent) => this.selectEmoji(event, item)}
-                >
-                    <i-label
-                        caption={item.htmlCode.join('')}
-                        display="inline-block"
-                        font={{ size: '18px' }}
-                    ></i-label>
-                </i-panel>
-            )
+            const panel = new Panel(itemWrap, {
+                width: '1.5rem',
+                height: '1.5rem',
+                cursor: 'pointer',
+                font: { size: '18px' }
+            });
+            panel.onClick = (target: Control, event: MouseEvent) => this.selectEmoji(event, item);
+            panel.innerHTML = item.htmlCode.join('');
         }
         if (this.isRecent(category)) {
             this.recent = group;
@@ -185,19 +180,14 @@ export default class EmojiPicker extends Module {
             const data = this.emojiModel.getEmojisByCategory(category.value);
             for (let i = 0; i < data.length; i++) {
                 const item = data[i];
-                gridElm.appendChild(
-                    <i-panel
-                        width={'1.5rem'} height={'1.5rem'}
-                        cursor="pointer"
-                        onClick={(target: Control, event: MouseEvent) => this.selectEmoji(event, item)}
-                    >
-                        <i-label
-                            caption={item.htmlCode.join('')}
-                            display="inline-block"
-                            font={{ size: '18px' }}
-                        ></i-label>
-                    </i-panel>
-                )
+                const panel = new Panel(gridElm, {
+                    width: '1.5rem',
+                    height: '1.5rem',
+                    cursor: 'pointer',
+                    font: { size: '18px' }
+                });
+                panel.onClick = (target: Control, event: MouseEvent) => this.selectEmoji(event, item);
+                panel.innerHTML = item.htmlCode.join('');
             }
         }
     }
@@ -285,7 +275,7 @@ export default class EmojiPicker extends Module {
     private async selectEmoji(event: MouseEvent, emoji: IEmoji) {
         event.stopImmediatePropagation();
         event.preventDefault();
-        this.lbEmoji.caption = emoji.htmlCode.join('');
+        this.lbEmoji.innerHTML = emoji.htmlCode.join('');
         if (this.onEmojiSelected) {
             const hexArr = emoji.unicode.map(u => parseInt(u.substring(2), 16));
             const value = String.fromCodePoint(...hexArr);
@@ -299,7 +289,7 @@ export default class EmojiPicker extends Module {
         this.pnlEmojiResult.visible = false;
         this.groupEmojis.visible = true;
         this.edtEmoji.value = '';
-        this.lbEmoji.caption = '';
+        this.lbEmoji.clearInnerHTML();
         this.isEmojiSearching = false;
         if (this.hasRecentEmojis) {
             const recent = this.groupEmojis.querySelector('#recent');
@@ -390,7 +380,7 @@ export default class EmojiPicker extends Module {
                     background={{ color: Theme.background.modal }}
                     border={{ radius: '0 0 1rem 1rem', top: { width: '1px', style: 'solid', color: Theme.divider } }}
                 >
-                    <i-label id="lbEmoji" width={'1.25rem'} height={'1.25rem'} display="inline-block"></i-label>
+                    <i-panel id="lbEmoji" width={'1.25rem'} height={'1.25rem'} display="inline-block"></i-panel>
                     <i-hstack
                         id="pnlColors"
                         verticalAlignment="center" gap={'0.25rem'}
