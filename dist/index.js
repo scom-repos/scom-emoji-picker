@@ -13078,8 +13078,14 @@ define("@scom/scom-emoji-picker", ["require", "exports", "@ijstech/components", 
             }
             for (let i = 0; i < data.length; i++) {
                 const item = data[i];
-                itemWrap.appendChild(this.$render("i-panel", { width: '1.5rem', height: '1.5rem', cursor: "pointer", onClick: (target, event) => this.selectEmoji(event, item) },
-                    this.$render("i-label", { caption: item.htmlCode.join(''), display: "inline-block", font: { size: '18px' } })));
+                const panel = new components_1.Panel(itemWrap, {
+                    width: '1.5rem',
+                    height: '1.5rem',
+                    cursor: 'pointer',
+                    font: { size: '18px' }
+                });
+                panel.onClick = (target, event) => this.selectEmoji(event, item);
+                panel.innerHTML = item.htmlCode.join('');
             }
             if (this.isRecent(category)) {
                 this.recent = group;
@@ -13096,8 +13102,14 @@ define("@scom/scom-emoji-picker", ["require", "exports", "@ijstech/components", 
                 const data = this.emojiModel.getEmojisByCategory(category.value);
                 for (let i = 0; i < data.length; i++) {
                     const item = data[i];
-                    gridElm.appendChild(this.$render("i-panel", { width: '1.5rem', height: '1.5rem', cursor: "pointer", onClick: (target, event) => this.selectEmoji(event, item) },
-                        this.$render("i-label", { caption: item.htmlCode.join(''), display: "inline-block", font: { size: '18px' } })));
+                    const panel = new components_1.Panel(gridElm, {
+                        width: '1.5rem',
+                        height: '1.5rem',
+                        cursor: 'pointer',
+                        font: { size: '18px' }
+                    });
+                    panel.onClick = (target, event) => this.selectEmoji(event, item);
+                    panel.innerHTML = item.htmlCode.join('');
                 }
             }
         }
@@ -13170,7 +13182,7 @@ define("@scom/scom-emoji-picker", ["require", "exports", "@ijstech/components", 
         async selectEmoji(event, emoji) {
             event.stopImmediatePropagation();
             event.preventDefault();
-            this.lbEmoji.caption = emoji.htmlCode.join('');
+            this.lbEmoji.innerHTML = emoji.htmlCode.join('');
             if (this.onEmojiSelected) {
                 const hexArr = emoji.unicode.map(u => parseInt(u.substring(2), 16));
                 const value = String.fromCodePoint(...hexArr);
@@ -13182,7 +13194,7 @@ define("@scom/scom-emoji-picker", ["require", "exports", "@ijstech/components", 
             this.pnlEmojiResult.visible = false;
             this.groupEmojis.visible = true;
             this.edtEmoji.value = '';
-            this.lbEmoji.caption = '';
+            this.lbEmoji.clearInnerHTML();
             this.isEmojiSearching = false;
             if (this.hasRecentEmojis) {
                 const recent = this.groupEmojis.querySelector('#recent');
@@ -13232,7 +13244,7 @@ define("@scom/scom-emoji-picker", ["require", "exports", "@ijstech/components", 
                 this.$render("i-vstack", { id: "groupEmojis", position: "relative", maxHeight: 300, overflow: { y: 'auto' } }),
                 this.$render("i-vstack", { id: "pnlEmojiResult", border: { bottom: { width: '1px', style: 'solid', color: Theme.divider } }, maxHeight: 300, overflow: { y: 'auto' }, minHeight: 200, gap: "0.75rem", visible: false }),
                 this.$render("i-hstack", { position: "relative", width: '100%', verticalAlignment: "center", horizontalAlignment: "space-between", padding: { top: '0.75rem', left: '0.75rem', right: '0.75rem', bottom: '0.75rem' }, gap: "0.75rem", background: { color: Theme.background.modal }, border: { radius: '0 0 1rem 1rem', top: { width: '1px', style: 'solid', color: Theme.divider } } },
-                    this.$render("i-label", { id: "lbEmoji", width: '1.25rem', height: '1.25rem', display: "inline-block" }),
+                    this.$render("i-panel", { id: "lbEmoji", width: '1.25rem', height: '1.25rem', display: "inline-block" }),
                     this.$render("i-hstack", { id: "pnlColors", verticalAlignment: "center", gap: '0.25rem', overflow: 'hidden', cursor: "pointer", padding: { top: '0.25rem', left: '0.25rem', right: '0.25rem', bottom: '0.25rem' } }))));
         }
     };
